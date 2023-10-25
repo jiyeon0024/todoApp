@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RiAddCircleLine } from "react-icons/ri";
-import { BiCircle } from "react-icons/bi";
+import { BsCircle } from "react-icons/bs";
 
 const Input = ({ placeholder, value, onChange, addInputInfo }) => {
   //   const [inputInfo, setInputInfo] = useState("");
@@ -12,7 +12,7 @@ const Input = ({ placeholder, value, onChange, addInputInfo }) => {
 
   return (
     <div className="flex gap-3 p-3 justify-center items-center bg-slate-800 text-white  rounded ">
-      <BiCircle size={30} />
+      <BsCircle size={33} />
       <input
         type="text"
         placeholder={placeholder}

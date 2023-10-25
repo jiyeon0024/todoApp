@@ -1,8 +1,19 @@
 import React, { useState } from "react";
-import { BiCircle } from "react-icons/bi";
+import { BsCircle } from "react-icons/bs";
+import { BsCheckCircleFill } from "react-icons/bs";
 
 const InputWithBtn = ({ value, removeBtn }) => {
   const [hover, setHover] = useState(false);
+  const [completeBtn, setCompleteBtn] = useState(false);
+
+  const completeButton = () => {
+    console.log(completeBtn);
+    if (completeBtn) {
+      setCompleteBtn(false);
+    } else {
+      setCompleteBtn(true);
+    }
+  };
 
   return (
     <div
@@ -14,11 +25,28 @@ const InputWithBtn = ({ value, removeBtn }) => {
         setHover(false);
       }}
     >
-      <BiCircle size={30} />
+      {completeBtn == true ? (
+        <BsCheckCircleFill
+          onClick={() => completeButton()}
+          size={30}
+          value={value}
+        />
+      ) : (
+        <BsCircle
+          size={30}
+          className="cursor-pointer"
+          onClick={() => completeButton()}
+        />
+      )}
+
       <input
         type="text"
         value={value}
-        className="w-full rounded h-12 pl-2 border-none outline-none bg-slate-800 "
+        className={
+          completeBtn == true
+            ? "line-through w-full rounded h-12 pl-2 border-none outline-none bg-slate-800 "
+            : "w-full rounded h-12 pl-2 border-none outline-none bg-slate-800 "
+        }
         readOnly
       />
       {hover ? (

@@ -20,6 +20,11 @@ function App() {
     setInputs(filteredInput);
   };
 
+  const clearBtn = () => {
+    let filterCompleted = inputs.filter((inputs) => inputs !== val);
+    setInputs(filterCompleted);
+  };
+
   return (
     <div>
       <img
@@ -52,6 +57,17 @@ function App() {
               />
             );
           })}
+          <div className="bg-slate-800 text-white  rounded p-3 ">
+            <ul className="flex gap-20 justify-center items-center">
+              <li>{` ${inputs.length} items left`} </li>
+              <li className="flex gap-3">
+                <span>All</span>
+                <span>Active</span>
+                <span>Completed</span>
+              </li>
+              <li className="cursor-pointer">Clear Completed</li>
+            </ul>
+          </div>
         </div>
       </div>
       <p className="text-gray-300 text-center absolute bottom-20 left-[50%] translate-x-[-50%]">
