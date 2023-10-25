@@ -17,9 +17,9 @@ const InputWithBtn = (props) => {
       <BiCircle size={30} />
       <input
         type="text"
-        placeholder={props.placeholder}
         value={props.value}
         className="w-full rounded h-12 pl-2 border-none outline-none bg-slate-800 "
+        readOnly
       />
       {hover ? (
         <button className="absolute right-[20px] top-[50%] translate-y-[-50%]">
