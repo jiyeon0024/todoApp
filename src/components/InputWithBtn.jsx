@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BiCircle } from "react-icons/bi";
 
-const InputWithBtn = (props) => {
+const InputWithBtn = ({ value, removeBtn }) => {
   const [hover, setHover] = useState(false);
 
   return (
@@ -17,12 +17,15 @@ const InputWithBtn = (props) => {
       <BiCircle size={30} />
       <input
         type="text"
-        value={props.value}
+        value={value}
         className="w-full rounded h-12 pl-2 border-none outline-none bg-slate-800 "
         readOnly
       />
       {hover ? (
-        <button className="absolute right-[20px] top-[50%] translate-y-[-50%]">
+        <button
+          className="absolute right-[20px] top-[50%] translate-y-[-50%]"
+          onClick={() => removeBtn()}
+        >
           <img src="./public/images/icon-cross.svg" alt="" />
         </button>
       ) : null}

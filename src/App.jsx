@@ -6,12 +6,18 @@ function App() {
   const [inputInfo, setInputInfo] = useState("");
   const [inputs, setInputs] = useState([]);
   const [click, setClick] = useState(false);
+
   const addInputInfo = () => {
     inputs.push(inputInfo);
     setInputs([...inputs]);
     setClick(true);
     console.log(inputs);
     console.log(inputInfo);
+  };
+
+  const removeBtn = (val) => {
+    let filteredInput = inputs.filter((inputs) => inputs !== val);
+    setInputs(filteredInput);
   };
 
   return (
@@ -38,7 +44,13 @@ function App() {
         />
         <div className="mt-6">
           {inputs?.map((i, index) => {
-            return <InputWithBtn value={i} key={i + index} />;
+            return (
+              <InputWithBtn
+                value={i}
+                key={i + index}
+                removeBtn={() => removeBtn(i)}
+              />
+            );
           })}
         </div>
       </div>
