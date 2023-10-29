@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import { BsCircle } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
 
-const InputWithBtn = ({ value, removeBtn }) => {
+const InputWithBtn = ({
+  value,
+  removeBtn,
+  completes,
+  complete,
+  removeCompletes,
+  OriginCompletes,
+}) => {
   const [hover, setHover] = useState(false);
-  const [completeBtn, setCompleteBtn] = useState(false);
 
   const completeButton = () => {
-    console.log(completeBtn);
-    if (completeBtn) {
-      setCompleteBtn(false);
+    if (complete == true) {
+      // remove complete
+      removeCompletes();
     } else {
-      setCompleteBtn(true);
+      completes();
+      OriginCompletes();
     }
   };
 
@@ -25,12 +32,8 @@ const InputWithBtn = ({ value, removeBtn }) => {
         setHover(false);
       }}
     >
-      {completeBtn == true ? (
-        <BsCheckCircleFill
-          onClick={() => completeButton()}
-          size={30}
-          value={value}
-        />
+      {complete ? (
+        <BsCheckCircleFill onClick={() => completeButton()} size={30} />
       ) : (
         <BsCircle
           size={30}
@@ -43,7 +46,7 @@ const InputWithBtn = ({ value, removeBtn }) => {
         type="text"
         value={value}
         className={
-          completeBtn == true
+          complete
             ? "line-through w-full rounded h-12 pl-2 border-none outline-none bg-slate-800 "
             : "w-full rounded h-12 pl-2 border-none outline-none bg-slate-800 "
         }
