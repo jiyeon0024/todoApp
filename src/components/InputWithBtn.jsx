@@ -9,6 +9,7 @@ const InputWithBtn = ({
   complete,
   removeCompletes,
   OriginCompletes,
+  removeOriginBtn,
 }) => {
   const [hover, setHover] = useState(false);
 
@@ -55,7 +56,10 @@ const InputWithBtn = ({
       {hover ? (
         <button
           className="absolute right-[20px] top-[50%] translate-y-[-50%]"
-          onClick={() => removeBtn()}
+          onClick={() => {
+            removeBtn();
+            removeOriginBtn();
+          }}
         >
           <img src="./public/images/icon-cross.svg" alt="" />
         </button>

@@ -27,6 +27,10 @@ function App() {
     let filteredInput = inputs.filter((inputs) => inputs !== val);
     setInputs(filteredInput);
   };
+  const removeOriginBtn = (val) => {
+    let filteredInput = inputs.filter((inputs) => inputs !== val);
+    setOrigin(filteredInput);
+  };
 
   const clearBtn = () => {
     let filteredInputs = origin.filter((input) => !input.completed);
@@ -70,16 +74,15 @@ function App() {
 
   const all = () => {
     setInputs(origin);
-    console.log(origin);
   };
 
   const left = inputs.filter((i) => i.completed == false);
-  console.log(left);
 
   return (
     <div className="relative">
-      <img src="./public/images/bg-desktop-dark.jpg" className="w-full "></img>
-      <div className="absolute top-[10%] left-[50%]   translate-x-[-50%]  p-2 w-[50%]">
+      {/* <img src="./public/images/bg-desktop-dark.jpg" className="w-full "></img> */}
+      <div className="md:bg-[url('/public/images/bg-desktop-dark.jpg')] bg-[url('/public/images/bg-mobile-dark.jpg')] bg-cover h-[300px] bg-no-repeat "></div>
+      <div className="absolute top-[10%] left-[50%]   translate-x-[-50%]  p-2 lg:w-[50%]">
         <div className="flex justify-between items-center mb-6">
           <p className="text-white text-4xl font-bold">T O D O</p>
           <img src="./public/images/icon-sun.svg" alt="" />
@@ -111,6 +114,7 @@ function App() {
                 complete={i.completed}
                 key={i.text + index}
                 removeBtn={() => removeBtn(i)}
+                removeOriginBtn={() => removeOriginBtn(i)}
                 completes={() => completes(i)}
                 OriginCompletes={() => OriginCompletes(i)}
                 removeCompletes={() => removeCompletes(i)}
