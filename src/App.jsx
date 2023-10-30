@@ -139,8 +139,8 @@ function App() {
             </p>
           ) : null}
 
-          <div className="mt-6 ">
-            <div className="shadow-lg">
+          <div className="mt-6  ">
+            <div className="">
               {inputs.map((i, index) => {
                 // console.log(i);
 
@@ -162,8 +162,8 @@ function App() {
                 <div
                   className={
                     lightMode
-                      ? "bg-white  rounded p-3"
-                      : "bg-slate-800 text-white  rounded p-3 "
+                      ? "bg-white  rounded p-3 shadow-lg"
+                      : "bg-slate-800 text-white  rounded p-3  shadow-lg"
                   }
                 >
                   <ul
@@ -178,7 +178,7 @@ function App() {
                     <li
                       className={
                         lightMode
-                          ? "md:flex gap-3 cursor-pointer w-fit  hidden text-gray-500"
+                          ? "md:flex gap-3 cursor-pointer w-fit  hidden text-gray-500 "
                           : "md:flex gap-3 cursor-pointer w-fit  hidden "
                       }
                     >
@@ -203,8 +203,8 @@ function App() {
                 <div
                   className={
                     lightMode
-                      ? "bg-white   rounded p-3  mt-5 md:hidden "
-                      : "bg-slate-800 text-white  rounded p-3  mt-5 md:hidden "
+                      ? "bg-white   rounded p-3  mt-5 md:hidden shadow-lg  "
+                      : "bg-slate-800 text-white  rounded p-3  mt-5 md:hidden shadow-lg  "
                   }
                 >
                   <ul className="flex justify-center">
