@@ -39,12 +39,18 @@ const InputWithBtn = ({
       }}
     >
       {complete ? (
-        <BsCheckCircleFill onClick={() => completeButton()} size={30} />
+        <BsCheckCircleFill
+          onClick={() => completeButton()}
+          size={30}
+          className={
+            lightMode ? "cursor-pointer text-gray-300 " : "cursor-pointer"
+          }
+        />
       ) : (
         <BsCircle
           size={30}
           className={
-            lightMode ? "cursor-pointer text-gray-300" : "cursor-pointer"
+            lightMode ? "cursor-pointer text-gray-300 " : "cursor-pointer"
           }
           onClick={() => completeButton()}
         />
