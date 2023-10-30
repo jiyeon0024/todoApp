@@ -10,6 +10,7 @@ const InputWithBtn = ({
   removeCompletes,
   OriginCompletes,
   removeOriginBtn,
+  lightMode,
 }) => {
   const [hover, setHover] = useState(false);
 
@@ -25,7 +26,11 @@ const InputWithBtn = ({
 
   return (
     <div
-      className="flex gap-3 p-3 justify-center items-center bg-slate-800 text-white  rounded  border-b-2 border-gray-600  relative "
+      className={
+        lightMode
+          ? "flex gap-3 p-3 justify-center items-center bg-white  rounded  border-b-2 border-gray-300  relative  "
+          : "flex gap-3 p-3 justify-center items-center bg-slate-800 text-white  rounded  border-b-2 border-gray-600  relative "
+      }
       onMouseEnter={() => {
         setHover(true);
       }}
@@ -38,7 +43,9 @@ const InputWithBtn = ({
       ) : (
         <BsCircle
           size={30}
-          className="cursor-pointer"
+          className={
+            lightMode ? "cursor-pointer text-gray-300" : "cursor-pointer"
+          }
           onClick={() => completeButton()}
         />
       )}
@@ -48,8 +55,12 @@ const InputWithBtn = ({
         value={value}
         className={
           complete
-            ? "line-through w-full rounded h-12 pl-2 border-none outline-none bg-slate-800 "
-            : "w-full rounded h-12 pl-2 border-none outline-none bg-slate-800 "
+            ? lightMode
+              ? "line-through w-full rounded h-12 pl-2 border-none outline-none bg-white"
+              : "line-through w-full rounded h-12 pl-2 border-none outline-none bg-slate-800 "
+            : lightMode
+            ? "w-full rounded h-12 pl-2 border-none outline-none bg-white"
+            : "w-full rounded h-12 pl-2 border-none outline-none bg-slate-800   "
         }
         readOnly
       />

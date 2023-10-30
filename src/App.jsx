@@ -8,6 +8,15 @@ function App() {
   const [click, setClick] = useState(false);
   const [origin, setOrigin] = useState([]);
   const [err, setErr] = useState(false);
+  const [lightMode, setLightMode] = useState(false);
+
+  const checkMode = () => {
+    if (lightMode) {
+      setLightMode(false);
+    } else {
+      setLightMode(true);
+    }
+  };
 
   const addInputInfo = () => {
     if (inputInfo !== "") {
@@ -79,84 +88,138 @@ function App() {
   const left = inputs.filter((i) => i.completed == false);
 
   return (
-    <div className="relative ">
+    <div className="relative  ">
       {/* <img src="./public/images/bg-desktop-dark.jpg" className="w-full "></img> */}
-      <div className="sm:bg-[url('/public/images/bg-desktop-dark.jpg')] bg-[url('/public/images/bg-mobile-dark.jpg')] bg-cover h-[300px] bg-no-repeat "></div>
-      <div className="absolute top-[10%] left-[50%]   translate-x-[-50%]  p-2 lg:w-[50%] w-[80%]">
-        <div className="flex justify-between items-center mb-6">
-          <p className="text-white text-4xl font-bold">T O D O</p>
-          <img src="./public/images/icon-sun.svg" alt="" />
-        </div>
-        <Input
-          placeholder={"Create a new todo"}
-          onChange={(e) => {
-            setInputInfo(e.target.value);
-            setClick(false);
-          }}
-          addInputInfo={() => {
-            addInputInfo();
-          }}
-          value={click == true ? "" : inputInfo}
-        />
-        {err == true ? (
-          <p className="text-blue-100 font-bold font-2xl float-right">
-            Can't empty!
-          </p>
-        ) : null}
-
-        <div className="mt-6">
-          {inputs.map((i, index) => {
-            // console.log(i);
-
-            return (
-              <InputWithBtn
-                value={i.text}
-                complete={i.completed}
-                key={i.text + index}
-                removeBtn={() => removeBtn(i)}
-                removeOriginBtn={() => removeOriginBtn(i)}
-                completes={() => completes(i)}
-                OriginCompletes={() => OriginCompletes(i)}
-                removeCompletes={() => removeCompletes(i)}
+      <div
+        className={
+          lightMode ? "bg-white min-h-[950px]" : "bg-[#161722] min-h-[950px]"
+        }
+      >
+        <div
+          className={
+            lightMode
+              ? "sm:bg-[url('/public/images/bg-desktop-light.jpg')] bg-[url('/public/images/bg-mobile-light.jpg')] bg-cover h-[300px] bg-no-repeat"
+              : "sm:bg-[url('/public/images/bg-desktop-dark.jpg')] bg-[url('/public/images/bg-mobile-dark.jpg')] bg-cover h-[300px] bg-no-repeat "
+          }
+        ></div>
+        <div className="absolute top-[10%] left-[50%]   translate-x-[-50%]  p-2 lg:w-[50%] w-[80%]">
+          <div className="flex justify-between items-center mb-6">
+            <p className="text-white text-4xl font-bold">T O D O</p>
+            {lightMode ? (
+              <img
+                src="./public/images/icon-moon.svg"
+                alt=""
+                onClick={() => checkMode()}
+                className="cursor-pointer"
               />
-            );
-          })}
-          <div>
-            <div className="bg-slate-800 text-white  rounded p-3 ">
-              <ul className="flex  justify-between items-center">
-                <li>{` ${left.length} items left`} </li>
+            ) : (
+              <img
+                src="./public/images/icon-sun.svg"
+                alt=""
+                onClick={() => checkMode()}
+                className="cursor-pointer"
+              />
+            )}
+          </div>
+          <Input
+            lightMode={lightMode}
+            placeholder={"Create a new todo"}
+            onChange={(e) => {
+              setInputInfo(e.target.value);
+              setClick(false);
+            }}
+            addInputInfo={() => {
+              addInputInfo();
+            }}
+            value={click == true ? "" : inputInfo}
+          />
+          {err == true ? (
+            <p className="text-blue-100 font-bold font-2xl float-right">
+              Can't empty!
+            </p>
+          ) : null}
 
-                <li className="md:flex gap-3 cursor-pointer w-fit  hidden ">
-                  <span onClick={() => all()} className="text-blue-500">
-                    All
-                  </span>
-                  <span onClick={() => activeList()}>Active</span>
-                  <span onClick={() => completedList()}>Completed</span>
-                </li>
+          <div className="mt-6 ">
+            <div className="shadow-lg">
+              {inputs.map((i, index) => {
+                // console.log(i);
 
-                <li className="cursor-pointer">
-                  <button
-                    onClick={() => {
-                      clearBtn();
-                    }}
+                return (
+                  <InputWithBtn
+                    value={i.text}
+                    complete={i.completed}
+                    key={i.text + index}
+                    removeBtn={() => removeBtn(i)}
+                    removeOriginBtn={() => removeOriginBtn(i)}
+                    completes={() => completes(i)}
+                    OriginCompletes={() => OriginCompletes(i)}
+                    removeCompletes={() => removeCompletes(i)}
+                    lightMode={lightMode}
+                  />
+                );
+              })}
+              <div>
+                <div
+                  className={
+                    lightMode
+                      ? "bg-white  rounded p-3"
+                      : "bg-slate-800 text-white  rounded p-3 "
+                  }
+                >
+                  <ul
+                    className={
+                      lightMode
+                        ? "flex  justify-between items-center text-gray-500"
+                        : "flex  justify-between items-center"
+                    }
                   >
-                    Clear Completed
-                  </button>
-                </li>
-              </ul>
-            </div>
-            <div className="bg-slate-800 text-white  rounded p-3  mt-5 md:hidden ">
-              <ul className="flex justify-center">
-                <li className="flex gap-10 cursor-pointer w-fit   justify-center items-center">
-                  <span onClick={() => all()} className="text-blue-500">
-                    All
-                  </span>
-                  <span onClick={() => activeList()}>Active</span>
-                  <span onClick={() => completedList()}>Completed</span>
-                </li>
+                    <li>{` ${left.length} items left`} </li>
 
-                <li className="cursor-pointer"></li>
-              </ul>
+                    <li
+                      className={
+                        lightMode
+                          ? "md:flex gap-3 cursor-pointer w-fit  hidden text-gray-500"
+                          : "md:flex gap-3 cursor-pointer w-fit  hidden "
+                      }
+                    >
+                      <span onClick={() => all()} className="text-blue-500">
+                        All
+                      </span>
+                      <span onClick={() => activeList()}>Active</span>
+                      <span onClick={() => completedList()}>Completed</span>
+                    </li>
+
+                    <li className="cursor-pointer">
+                      <button
+                        onClick={() => {
+                          clearBtn();
+                        }}
+                      >
+                        Clear Completed
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  className={
+                    lightMode
+                      ? "bg-white   rounded p-3  mt-5 md:hidden "
+                      : "bg-slate-800 text-white  rounded p-3  mt-5 md:hidden "
+                  }
+                >
+                  <ul className="flex justify-center">
+                    <li className="flex gap-10 cursor-pointer w-fit   justify-center items-center">
+                      <span onClick={() => all()} className="text-blue-500">
+                        All
+                      </span>
+                      <span onClick={() => activeList()}>Active</span>
+                      <span onClick={() => completedList()}>Completed</span>
+                    </li>
+
+                    <li className="cursor-pointer"></li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <p className="text-gray-300 text-center m-5">
               Drag and drop to reorder list
