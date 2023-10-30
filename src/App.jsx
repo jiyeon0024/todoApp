@@ -79,10 +79,10 @@ function App() {
   const left = inputs.filter((i) => i.completed == false);
 
   return (
-    <div className="relative">
+    <div className="relative ">
       {/* <img src="./public/images/bg-desktop-dark.jpg" className="w-full "></img> */}
-      <div className="md:bg-[url('/public/images/bg-desktop-dark.jpg')] bg-[url('/public/images/bg-mobile-dark.jpg')] bg-cover h-[300px] bg-no-repeat "></div>
-      <div className="absolute top-[10%] left-[50%]   translate-x-[-50%]  p-2 lg:w-[50%]">
+      <div className="sm:bg-[url('/public/images/bg-desktop-dark.jpg')] bg-[url('/public/images/bg-mobile-dark.jpg')] bg-cover h-[300px] bg-no-repeat "></div>
+      <div className="absolute top-[10%] left-[50%]   translate-x-[-50%]  p-2 lg:w-[50%] w-[80%]">
         <div className="flex justify-between items-center mb-6">
           <p className="text-white text-4xl font-bold">T O D O</p>
           <img src="./public/images/icon-sun.svg" alt="" />
@@ -123,10 +123,10 @@ function App() {
           })}
           <div>
             <div className="bg-slate-800 text-white  rounded p-3 ">
-              <ul className="flex gap-20 justify-center items-center">
+              <ul className="flex  justify-between items-center">
                 <li>{` ${left.length} items left`} </li>
 
-                <li className="flex gap-3 cursor-pointer">
+                <li className="md:flex gap-3 cursor-pointer w-fit  hidden ">
                   <span onClick={() => all()} className="text-blue-500">
                     All
                   </span>
@@ -143,6 +143,19 @@ function App() {
                     Clear Completed
                   </button>
                 </li>
+              </ul>
+            </div>
+            <div className="bg-slate-800 text-white  rounded p-3  mt-5 md:hidden ">
+              <ul className="flex justify-center">
+                <li className="flex gap-10 cursor-pointer w-fit   justify-center items-center">
+                  <span onClick={() => all()} className="text-blue-500">
+                    All
+                  </span>
+                  <span onClick={() => activeList()}>Active</span>
+                  <span onClick={() => completedList()}>Completed</span>
+                </li>
+
+                <li className="cursor-pointer"></li>
               </ul>
             </div>
             <p className="text-gray-300 text-center m-5">

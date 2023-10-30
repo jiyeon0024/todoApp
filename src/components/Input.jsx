@@ -11,13 +11,13 @@ const Input = ({ placeholder, value, onChange, addInputInfo }) => {
   //   };
 
   return (
-    <div className="flex gap-3 p-3 justify-center items-center bg-slate-800 text-white  rounded ">
+    <div className="flex gap-3 p-3 justify-center items-center bg-slate-800 text-white  rounded ] ">
       <BsCircle size={33} />
       <input
         type="text"
         placeholder={placeholder}
         value={value}
-        className="w-full rounded h-12 pl-2 border-none outline-none bg-slate-800"
+        className="   w-full rounded h-12 pl-2 border-none outline-none bg-slate-800"
         // onChange={(e) => setInputInfo(e.target.value)}
         onChange={onChange}
       />

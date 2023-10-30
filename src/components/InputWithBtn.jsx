@@ -25,7 +25,7 @@ const InputWithBtn = ({
 
   return (
     <div
-      className="flex gap-3 p-3 justify-center items-center bg-slate-800 text-white  rounded  border-b-2 border-gray-600  relative"
+      className="flex gap-3 p-3 justify-center items-center bg-slate-800 text-white  rounded  border-b-2 border-gray-600  relative "
       onMouseEnter={() => {
         setHover(true);
       }}
