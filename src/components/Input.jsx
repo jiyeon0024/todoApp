@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { RiAddCircleLine } from "react-icons/ri";
 import { BsCircle, BsLightningCharge } from "react-icons/bs";
 
-const Input = ({ placeholder, value, onChange, addInputInfo, lightMode }) => {
+const Input = ({
+  placeholder,
+  value,
+  onChange,
+  addInputInfo,
+  lightMode,
+  onKeyPress,
+}) => {
   //   const [inputInfo, setInputInfo] = useState("");
   //   const [inputs, setInputs] = useState([]);
 
@@ -30,6 +37,7 @@ const Input = ({ placeholder, value, onChange, addInputInfo, lightMode }) => {
         }
         // onChange={(e) => setInputInfo(e.target.value)}
         onChange={onChange}
+        onKeyPress={onKeyPress}
       />
 
       <button

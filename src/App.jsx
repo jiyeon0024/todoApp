@@ -130,6 +130,12 @@ function App() {
 
   const left = inputs.filter((i) => i.completed == false);
 
+  const handleEnterKey = (e) => {
+    if (e.key === "Enter") {
+      addInputInfo();
+    }
+  };
+
   return (
     <div className="relative  ">
       {/* <img src="./public/images/bg-desktop-dark.jpg" className="w-full "></img> */}
@@ -175,6 +181,7 @@ function App() {
               addInputInfo();
             }}
             value={click == true ? "" : inputInfo}
+            onKeyPress={(e) => handleEnterKey(e)}
           />
           {err == true ? (
             <p className="text-blue-100 font-bold font-2xl float-right">
