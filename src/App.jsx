@@ -1,10 +1,13 @@
 import Input from "./components/Input";
 import InputWithBtn from "./components/InputWithBtn";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Reorder } from "framer-motion";
 
 function App() {
   const [inputInfo, setInputInfo] = useState("");
   const [inputs, setInputs] = useState([]);
+
   const [click, setClick] = useState(false);
   const [origin, setOrigin] = useState([]);
   const [err, setErr] = useState(false);
@@ -180,15 +183,17 @@ function App() {
           ) : null}
 
           <div className="mt-6  ">
-            <div className="">
+            <Reorder.Group axis="y" values={inputs} onReorder={setInputs}>
               {inputs.map((i, index) => {
                 // console.log(i);
 
                 return (
                   <InputWithBtn
+                    item={i}
                     value={i.text}
                     complete={i.completed}
-                    key={i.text + index}
+                    // key={i.text + index}
+                    key={i.text}
                     removeBtn={() => removeBtn(i)}
                     removeOriginBtn={() => removeOriginBtn(i)}
                     completes={() => completes(i)}
@@ -198,112 +203,111 @@ function App() {
                   />
                 );
               })}
-              <div>
-                <div
+            </Reorder.Group>
+
+            <div
+              className={
+                lightMode
+                  ? "bg-white  rounded p-3 shadow-lg"
+                  : "bg-slate-800 text-white  rounded p-3  shadow-lg"
+              }
+            >
+              <ul
+                className={
+                  lightMode
+                    ? "flex  justify-between items-center text-gray-500"
+                    : "flex  justify-between items-center"
+                }
+              >
+                <li>{` ${left.length} items left`} </li>
+
+                <li
                   className={
                     lightMode
-                      ? "bg-white  rounded p-3 shadow-lg"
-                      : "bg-slate-800 text-white  rounded p-3  shadow-lg"
+                      ? "md:flex gap-3 cursor-pointer w-fit  hidden text-gray-500 "
+                      : "md:flex gap-3 cursor-pointer w-fit  hidden "
                   }
                 >
-                  <ul
-                    className={
-                      lightMode
-                        ? "flex  justify-between items-center text-gray-500"
-                        : "flex  justify-between items-center"
-                    }
+                  <span
+                    onClick={() => {
+                      all();
+                      clickedAll();
+                    }}
+                    className={clicked ? "text-blue-500" : ""}
                   >
-                    <li>{` ${left.length} items left`} </li>
+                    All
+                  </span>
+                  <span
+                    className={clickActive ? "text-blue-500" : ""}
+                    onClick={() => {
+                      activeList();
+                      clickedActive();
+                    }}
+                  >
+                    Active
+                  </span>
+                  <span
+                    className={Completed ? "text-blue-500" : ""}
+                    onClick={() => {
+                      completedList();
+                      Complete();
+                    }}
+                  >
+                    Completed
+                  </span>
+                </li>
 
-                    <li
-                      className={
-                        lightMode
-                          ? "md:flex gap-3 cursor-pointer w-fit  hidden text-gray-500 "
-                          : "md:flex gap-3 cursor-pointer w-fit  hidden "
-                      }
+                <li className="cursor-pointer">
+                  <button
+                    className="hover:text-blue-500"
+                    onClick={() => {
+                      clearBtn();
+                    }}
+                  >
+                    Clear Completed
+                  </button>
+                </li>
+              </ul>
+              <div
+                className={
+                  lightMode
+                    ? "bg-white   rounded p-3  mt-5 md:hidden shadow-lg  "
+                    : "bg-slate-800 text-white  rounded p-3  mt-5 md:hidden shadow-lg  "
+                }
+              >
+                <ul className="flex justify-center">
+                  <li className="flex gap-10 cursor-pointer w-fit   justify-center items-center">
+                    <span
+                      onClick={() => {
+                        all();
+                        clickedAll();
+                      }}
+                      className={clicked ? "text-blue-500" : ""}
                     >
-                      <span
-                        onClick={() => {
-                          all();
-                          clickedAll();
-                        }}
-                        className={clicked ? "text-blue-500" : ""}
-                      >
-                        All
-                      </span>
-                      <span
-                        className={clickActive ? "text-blue-500" : ""}
-                        onClick={() => {
-                          activeList();
-                          clickedActive();
-                        }}
-                      >
-                        Active
-                      </span>
-                      <span
-                        className={Completed ? "text-blue-500" : ""}
-                        onClick={() => {
-                          completedList();
-                          Complete();
-                        }}
-                      >
-                        Completed
-                      </span>
-                    </li>
+                      All
+                    </span>
+                    <span
+                      className={clickActive ? "text-blue-500" : ""}
+                      onClick={() => {
+                        activeList();
+                        clickedActive();
+                      }}
+                    >
+                      Active
+                    </span>
+                    <span
+                      className={Completed ? "text-blue-500" : ""}
+                      onClick={() => {
+                        completedList();
+                        Complete();
+                      }}
+                    >
+                      Completed
+                    </span>
+                  </li>
 
-                    <li className="cursor-pointer">
-                      <button
-                        className="hover:text-blue-500"
-                        onClick={() => {
-                          clearBtn();
-                        }}
-                      >
-                        Clear Completed
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                <div
-                  className={
-                    lightMode
-                      ? "bg-white   rounded p-3  mt-5 md:hidden shadow-lg  "
-                      : "bg-slate-800 text-white  rounded p-3  mt-5 md:hidden shadow-lg  "
-                  }
-                >
-                  <ul className="flex justify-center">
-                    <li className="flex gap-10 cursor-pointer w-fit   justify-center items-center">
-                      <span
-                        onClick={() => {
-                          all();
-                          clickedAll();
-                        }}
-                        className={clicked ? "text-blue-500" : ""}
-                      >
-                        All
-                      </span>
-                      <span
-                        className={clickActive ? "text-blue-500" : ""}
-                        onClick={() => {
-                          activeList();
-                          clickedActive();
-                        }}
-                      >
-                        Active
-                      </span>
-                      <span
-                        className={Completed ? "text-blue-500" : ""}
-                        onClick={() => {
-                          completedList();
-                          Complete();
-                        }}
-                      >
-                        Completed
-                      </span>
-                    </li>
-
-                    <li className="cursor-pointer"></li>
-                  </ul>
-                </div>
+                  <li className="cursor-pointer"></li>
+                </ul>
               </div>
             </div>
             <p className="text-gray-300 text-center m-5">
