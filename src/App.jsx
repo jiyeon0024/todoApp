@@ -9,6 +9,45 @@ function App() {
   const [origin, setOrigin] = useState([]);
   const [err, setErr] = useState(false);
   const [lightMode, setLightMode] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [clickActive, setClickedActive] = useState(false);
+  const [Completed, setCompleted] = useState(false);
+
+  const clickedAll = () => {
+    if (clicked) {
+      setClicked(false);
+      setCompleted(false);
+      setClickedActive(false);
+    } else {
+      setClicked(true);
+      setClickedActive(false);
+      setCompleted(false);
+    }
+  };
+
+  const clickedActive = () => {
+    if (clickActive) {
+      setClickedActive(false);
+      setCompleted(false);
+      setClicked(false);
+    } else {
+      setClickedActive(true);
+      setClicked(false);
+      setCompleted(false);
+    }
+  };
+
+  const Complete = () => {
+    if (Completed) {
+      setCompleted(false);
+      setClickedActive(false);
+      setClicked(false);
+    } else {
+      setClicked(false);
+      setCompleted(true);
+      setClickedActive(false);
+    }
+  };
 
   const checkMode = () => {
     if (lightMode) {
@@ -33,7 +72,7 @@ function App() {
   };
 
   const removeBtn = (val) => {
-    let filteredInput = inputs.filter((inputs) => inputs !== val);
+    let filteredInput = origin.filter((inputs) => inputs !== val);
     setInputs(filteredInput);
   };
   const removeOriginBtn = (val) => {
@@ -42,8 +81,9 @@ function App() {
   };
 
   const clearBtn = () => {
-    let filteredInputs = origin.filter((input) => !input.completed);
+    let filteredInputs = origin.filter((input) => input.completed == false);
     setInputs(filteredInputs);
+    setOrigin(filteredInputs);
   };
 
   const completes = (val) => {
@@ -92,7 +132,7 @@ function App() {
       {/* <img src="./public/images/bg-desktop-dark.jpg" className="w-full "></img> */}
       <div
         className={
-          lightMode ? "bg-white min-h-[950px]" : "bg-[#161722] min-h-[950px]"
+          lightMode ? "bg-white min-h-screen" : "bg-[#161722] min-h-screen"
         }
       >
         <div
@@ -182,15 +222,38 @@ function App() {
                           : "md:flex gap-3 cursor-pointer w-fit  hidden "
                       }
                     >
-                      <span onClick={() => all()} className="text-blue-500">
+                      <span
+                        onClick={() => {
+                          all();
+                          clickedAll();
+                        }}
+                        className={clicked ? "text-blue-500" : ""}
+                      >
                         All
                       </span>
-                      <span onClick={() => activeList()}>Active</span>
-                      <span onClick={() => completedList()}>Completed</span>
+                      <span
+                        className={clickActive ? "text-blue-500" : ""}
+                        onClick={() => {
+                          activeList();
+                          clickedActive();
+                        }}
+                      >
+                        Active
+                      </span>
+                      <span
+                        className={Completed ? "text-blue-500" : ""}
+                        onClick={() => {
+                          completedList();
+                          Complete();
+                        }}
+                      >
+                        Completed
+                      </span>
                     </li>
 
                     <li className="cursor-pointer">
                       <button
+                        className="hover:text-blue-500"
                         onClick={() => {
                           clearBtn();
                         }}
@@ -209,11 +272,33 @@ function App() {
                 >
                   <ul className="flex justify-center">
                     <li className="flex gap-10 cursor-pointer w-fit   justify-center items-center">
-                      <span onClick={() => all()} className="text-blue-500">
+                      <span
+                        onClick={() => {
+                          all();
+                          clickedAll();
+                        }}
+                        className={clicked ? "text-blue-500" : ""}
+                      >
                         All
                       </span>
-                      <span onClick={() => activeList()}>Active</span>
-                      <span onClick={() => completedList()}>Completed</span>
+                      <span
+                        className={clickActive ? "text-blue-500" : ""}
+                        onClick={() => {
+                          activeList();
+                          clickedActive();
+                        }}
+                      >
+                        Active
+                      </span>
+                      <span
+                        className={Completed ? "text-blue-500" : ""}
+                        onClick={() => {
+                          completedList();
+                          Complete();
+                        }}
+                      >
+                        Completed
+                      </span>
                     </li>
 
                     <li className="cursor-pointer"></li>
