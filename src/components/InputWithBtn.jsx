@@ -13,6 +13,7 @@ const InputWithBtn = ({
   OriginCompletes,
   removeOriginBtn,
   lightMode,
+  index,
 }) => {
   const [hover, setHover] = useState(false);
 
@@ -27,7 +28,7 @@ const InputWithBtn = ({
   };
 
   return (
-    <Reorder.Item value={item}>
+    <Reorder.Item value={item} id={item}>
       <div
         className={
           lightMode
