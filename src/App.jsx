@@ -1,7 +1,7 @@
 import Input from "./components/Input";
 import InputWithBtn from "./components/InputWithBtn";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+
 import { Reorder } from "framer-motion";
 
 function App() {
@@ -81,27 +81,29 @@ function App() {
   const removeOriginBtn = (val) => {
     let filteredInput = inputs.filter((inputs) => inputs !== val);
     setOrigin(filteredInput);
+    localStorage.setItem("todos", JSON.stringify(filteredInput));
   };
 
   const clearBtn = () => {
     let filteredInputs = origin.filter((input) => input.completed == false);
     setInputs(filteredInputs);
     setOrigin(filteredInputs);
+    localStorage.setItem("todos", JSON.stringify(filteredInputs));
   };
 
   const completes = (val) => {
-    // filterCompleted = inputs.filter((inputs) => inputs.text !== val.text);
     let newInputs = inputs.map((i) =>
       i.text !== val.text ? i : { text: i.text, completed: true }
     );
     setInputs(newInputs);
+    localStorage.setItem("todos", JSON.stringify(newInputs));
   };
   const OriginCompletes = (val) => {
-    // filterCompleted = inputs.filter((inputs) => inputs.text !== val.text);
     let newInputs = origin.map((i) =>
       i.text !== val.text ? i : { text: i.text, completed: true }
     );
     setOrigin(newInputs);
+    localStorage.setItem("todos", JSON.stringify(newInputs));
   };
 
   const removeCompletes = (val) => {
@@ -113,6 +115,7 @@ function App() {
       }
     });
     setInputs(NewInputs);
+    localStorage.setItem("todos", JSON.stringify(NewInputs));
   };
 
   const completedList = () => {
@@ -135,6 +138,14 @@ function App() {
       addInputInfo();
     }
   };
+
+  useEffect(() => {
+    const localTodos = localStorage.getItem("todos");
+    if (localTodos) {
+      setOrigin(JSON.parse(localTodos));
+      setInputs(JSON.parse(localTodos));
+    }
+  }, []);
 
   return (
     <div className="relative  ">
